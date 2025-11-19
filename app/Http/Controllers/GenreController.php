@@ -19,6 +19,10 @@ class GenreController extends Controller
         $genre = Genre::find($id);
         return view('ManageGenre.ManageGenre_detail', compact('genre'));
     }
+    public function create() {
+    return view('ManageGenre.genre_create'); // create a blade file for adding genre
+}
+
 
     }
 

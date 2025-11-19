@@ -1,4 +1,4 @@
-@extends('Template.template_guest')
+@extends('Components.guest')
 
 @section('title', 'Search | GameSlot')
 

@@ -1,6 +1,6 @@
-@extends('Template.template_customer')
+@extends('Components.customer')
 
-@section('title', 'History | GameSlot')
+@section('title', 'History | Epics Game Store')
 
 @section('content')
 <div class="mt-4">
@@ -15,7 +15,7 @@
             <div>
                 <h2 class="mt-3">You don't have any transactions yet.</h2>
                 <form action="{{route('home_customer')}}">
-                    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">See Game(s) to Purchase</button>
+                    <button type="submit" class="btn btn-light" data-toggle="modal" data-target="#exampleModal">See Game(s) to Purchase</button>
                 </form>
             </div>
         @else
@@ -45,8 +45,8 @@
                                         <tbody>
                                             @foreach ($ht as $ht1)
                                                 <tr>
-                                                    <td><a href="{{route('detail_customer', ['id' => $ht1->game->id])}}"><img src="{{asset($ht1->game->game_image)}}" width="150px" height="auto"></a></td>
-                                                    <td><a href="{{route('detail_customer', ['id' => $ht1->game->id])}}" style="text-decoration: none; color: black"><h5>{{$ht1->game->game_name}}</h5></a></td>
+                                                    <td><a href="{{route('customer.detail', ['id' => $ht1->game->id])}}"><img src="{{asset($ht1->game->game_image)}}" width="150px" height="auto"></a></td>
+                                                    <td><a href="{{route('customer.detail', ['id' => $ht1->game->id])}}" style="text-decoration: none; color: black"><h5>{{$ht1->game->game_name}}</h5></a></td>
                                                     <td><p style="text-align: center">{{$ht1->qty}}</p></td>
                                                     <td><p style="text-align: center">${{$ht1->qty * $ht1->game->game_price}}</p></td>
                                                 </tr>

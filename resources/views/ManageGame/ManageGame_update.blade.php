@@ -1,14 +1,14 @@
-@extends('Template.template_manage_game')
+@extends('Components.admin')
 
 @section('title', 'Update Game | GameSlot')
 
 @section('content')
-    <form action="{{route('manage_game')}}">
+    <form action="{{route('admin.games.index')}}">
         <button type="submit" class="btn btn-primary"><i class="bi bi-arrow-left"></i> Back</button>
     </form>
     <br>
     <h3>Update game</h3>
-    <form action="{{route('manage_game_update_logic', ['id' => $game->id])}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('admin.games.update', ['id' => $game->id])}}" method="POST" enctype="multipart/form-data">
         @method('patch')
         @csrf
 
@@ -34,6 +34,25 @@
                 </div>
             @enderror
         </div>
+<div class="form-group mb-3">
+    <label for="installer" class="form-label">Game Installer File</label>
+    <p style="font-weight: bold;">Allowed File Types: .zip / .rar / .exe</p>
+
+    @if($game->installer)
+        <p>Current Installer:
+            <a href="{{ asset('storage/installers/' . $game->installer) }}" target="_blank">
+                {{ $game->installer }}
+            </a>
+        </p>
+    @endif
+
+    <input type="file" class="form-control-file @error('installer') is-invalid @enderror"
+           id="installer" name="installer" accept=".zip,.rar,.exe">
+
+    @error('installer')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
 
         <div class="mb-3">
             <label for="" class="form-label">Game Description<span style="color: red">*</label>
@@ -58,20 +77,23 @@
         </div>
 
         <div class="mb-3">
-            <label for="" class="form-label">Genre<span style="color: red">*</label>
-                <select id="inputState" class="form-select @error('game_genre_id') is-invalid @enderror" name="game_genre_id">
-                    <option>Choose Genre</option>
-                    @foreach($genres as $genre)
-                        <option value="{{ $genre->id }}" @if (old('game_genre_id') == $genre->id) {{'selected'}} @endif>{{ $genre->genre_name }}</option>
-                    @endforeach
-                </select>
+    <label for="genre_id" class="form-label">Genre<span style="color: red">*</span></label>
+    <select id="genre_id" class="form-select @error('genre_id') is-invalid @enderror" name="genre_id">
+        <option value="">Choose Genre</option>
+        @foreach($genres as $genre)
+            <option value="{{ $genre->id }}" 
+                @if ($game->genre_id == $genre->id) selected @endif>
+                {{ $genre->genre_name }}
+            </option>
+        @endforeach
+    </select>
 
-                @error('game_genre_id')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
+    @error('genre_id')
+        <div class="invalid-feedback">
+            {{ $message }}
         </div>
+    @enderror
+</div>
 
         <div class="mb-3">
             <label for="" class="form-label">PEGI Rating<span style="color: red">*</label>

@@ -1,7 +1,7 @@
 
 @extends('Components.guest')
 
-@section('title', 'Home | GameSlot')
+@section('title', 'Home | Epics Game Store')
 
 @section('content')
 

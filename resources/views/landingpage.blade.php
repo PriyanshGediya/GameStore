@@ -4,68 +4,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gamestore | Landing Page</title>
-    <!-- Bootstrap 5 CSS -->
+    <title>Epics Game Store  | Landing Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('storage/images/app_logo.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('storage/images/gameslot_logo.png') }}">
     <style>
         body {
+            background-color: #121212;
+            color: #fff;
+            font-family: 'Open Sans', sans-serif;
             height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: #f8f9fa;
         }
 
-        .jumbotron {
+        .landing-card {
+            background-color: #1e1e1e;
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             text-align: center;
-            background-color: transparent;
+            width: 100%;
+            max-width: 500px;
         }
 
-        .logo {
-            max-width: 250px;
-            max-height: 250px;
-            /* Adjust the height as needed */
+        .landing-card .logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+            object-fit: contain;
+        }
+
+        .landing-card h1 {
+            margin-bottom: 10px;
+        }
+
+        .landing-card p {
             margin-bottom: 20px;
         }
 
-        .btn {
+        .btn-custom {
             width: 150px;
-            margin: 10px;
-            background-color: #ffffff;
-            color: #000000;
+            margin: 5px;
+            font-weight: bold;
+            color: #fff;
+            border: 2px solid #fff;
+            background-color: transparent;
+            transition: all 0.3s ease;
         }
 
-        .btn:hover {
-            background-color: #007bff;
-            color: #ffffff;
+        .btn-custom:hover {
+            background-color: #fff;
+            color: #000;
         }
 
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center; 
+            padding: 10px 0;
+            border-top: 1px solid #333;
+            background-color: #121212;
+            color: #fff;
+        }
     </style>
 </head>
 
 <body>
-    <div class="jumbotron text-center">
-    <img src="{{ asset('storage/images/app_logo.png') }}" alt="Logo" class="logo">
-        <h1 class="display-4">Gamestore</h1>
-        <p class="lead">Welcome to Gamestore Web App</p>
-        <hr class="my-4">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-            <a class="btn btn-primary btn-lg" href="{{ route('login_page') }}" role="button">Login </a>
-            <a class="btn btn-primary btn-lg" href="{{ route('register_page') }}" role="button">Register </a>
+    <div class="landing-card">
+        <img src="{{ asset('storage/images/gameslot_logo.png') }}" alt="Logo" class="logo">
+        <h1 class="display-5">Epics Game Store </h1>
+        <p class="lead">Welcome to Epics Game Store  Web App</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{{ route('login_page') }}" class="btn btn-custom">Login</a>
+            <a href="{{ route('register_page') }}" class="btn btn-custom">Register</a>
         </div>
     </div>
-    <!-- Bootstrap 5 JS and Popper.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 
-    <footer class="text-center py-3 my-4 border-top">
-        <span class="mb-3 mb-md-0">© 2023 ED</span>
+    <footer>
+        © 2025
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>

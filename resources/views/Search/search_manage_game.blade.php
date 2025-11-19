@@ -1,4 +1,4 @@
-@extends('Template.template_manage_game')
+@extends('Components.admin')
 
 @section('title', 'Search | GameSlot')
 

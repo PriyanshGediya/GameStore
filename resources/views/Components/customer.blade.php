@@ -4,54 +4,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <title>@yield('title')</title>
-</head>
-<body>
-    {{-- Header/Navbar --}}
-    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start mt-2 container">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #121212; /* dark background */
+            color: #fff;
+        }
 
-        <a class="navbar-brand px-2" href="{{route('home_guest')}}">
-            <img src="{{asset('storage/images/gameslot_logo.png')}}" width="75" height="75" alt="GameSlot">
+        .navbar-brand img {
+            height: 60px;
+            width: auto;
+        }
+
+        .search-bar {
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #343a40;
+            color: #fff;
+        }
+
+        .cart-icon {
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        footer {
+            color: #ccc;
+        }
+
+        @media (max-width: 768px) {
+            .search-bar {
+                max-width: 100%;
+                margin-top: 10px;
+            }
+
+            .d-flex.nav-items {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header / Navbar -->
+    <nav class="container d-flex flex-wrap align-items-center justify-content-between py-3">
+        <a class="navbar-brand" href="{{route('home_guest')}}">
+            <img src="{{asset('storage/images/gameslot_logo.png')}}" alt="Game Store">
         </a>
 
-        <form action="{{route('search_guest')}}" class="mx-auto" role="search">
+        <form action="{{route('customer.search')}}" class="mx-auto flex-grow-1 d-flex justify-content-center" role="search">
             @csrf
-            <input type="search" class="form-control" name="search_game_name" style="width: 1000px;" placeholder="Search Game..." aria-label="Search">
+            <input type="search" class="form-control search-bar" name="search_game_name" placeholder="Search games...">
         </form>
 
-        <a href="{{route('cart_view')}}"><i class="bi bi-cart2 fa-lg" style="margin-left: 20px; margin-right: 20px; color: black; font-size:20px;"></i></a>
+        <div class="d-flex align-items-center gap-3 nav-items">
+            @auth
+                <div class="dropdown">
+                    <button class="btn btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        Filter by Genre
+                    </button>
+                    <ul class="dropdown-menu">
+                        @foreach(\App\Models\Genre::all() as $genre)
+                            <li>
+                                <a class="dropdown-item" href="{{ route('customer.cart.filter.genre', $genre->id) }}">
+                                    {{ $genre->genre_name }}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endauth
 
-        <div class="dropdown text-end">
-          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                {{Auth::user()->name}}
-          </a>
-          <ul class="dropdown-menu text-small">
-                <li><a class="dropdown-item" href="{{route('history_index')}}"><i class="bi bi-clock-history"></i> History</a></li>
-                <li><a class="dropdown-item" href="{{route('profile_customer', ['id' => Auth::user()->id])}}"><i class="bi bi-person"></i> Profile</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="{{route('logout')}}"><i class="bi bi-box-arrow-left"></i> Sign out</a></li>
-          </ul>
+            <a href="{{route('customer.cart.view')}}" class="cart-icon">
+                <i class="bi bi-cart2"></i>
+            </a>
+
+            <div class="dropdown text-end">
+                @auth
+                    <a href="#" class="text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
+                        {{ Auth::user()->name }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="{{route('customer.history')}}"><i class="bi bi-clock-history"></i> History</a></li>
+                        <li><a class="dropdown-item" href="{{route('customer.profile.edit')}}"><i class="bi bi-person"></i> Profile</a></li>
+                        <li><a class="dropdown-item" href="{{ route('customer.customer.library') }}"><i class="bi bi-collection"></i> Library</a></li>
+
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{{route('logout')}}"><i class="bi bi-box-arrow-left"></i> Sign out</a></li>
+                    </ul>
+                @endauth
+
+                @guest
+                    <a href="{{ route('login') }}" class="text-white text-decoration-none">Login</a>
+                @endguest
+            </div>
         </div>
-      </div>
+    </nav>
 
-    {{-- Web Content --}}
+    <!-- Main Content -->
     <div class="container mt-5 mb-5">
         @yield('content')
     </div>
 
-    <div class="container">
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-            <div class="col-md-4 d-flex align-items-center">
-                <span class="mb-3 mb-md-0 text-muted">© 2023 GameSlot</span>
-            </div>
-        </footer>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Footer -->
+    <footer class="container py-3 border-top text-center">
+        <span>© 2025 Game Store</span>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

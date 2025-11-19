@@ -16,15 +16,13 @@
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start mt-2 container">
 
         <a class="navbar-brand px-2" href="{{route('home_guest')}}">
-            <img src="{{asset('storage/images/gameslot_logo.png')}}" width="75" height="75" alt="GameSlot">
+            <img src="{{asset('storage/images/gameslot_logo.png')}}" width="75" height="75" alt="Game Store">
         </a>
 
-        <form action="{{route('search_guest')}}" class="mx-auto" role="search">
+        <form action="{{route('guest.search')}}" class="mx-auto" role="search">
             @csrf
             <input type="search" class="form-control" name="search_game_name" style="width: 900px;" placeholder="Search Game..." aria-label="Search">
         </form>
-
-        <a href="{{route('login_page')}}"><i class="bi bi-cart2 fa-lg" style="margin-left: 20px; margin-right: 5px; color: black; font-size:20px;"></i></a>
 
         <div class="col-md-2 text-end">
             <a href="{{route('login_page')}}" class="btn btn-outline-primary me-2 btn-block">Log In</a>
@@ -40,7 +38,7 @@
     <div class="container">
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
             <div class="col-md-4 d-flex align-items-center">
-                <span class="mb-3 mb-md-0 text-muted">© 2023 GameSlot</span>
+                <span class="mb-3 mb-md-0 text-muted">© 2025 Game Store</span>
             </div>
         </footer>
     </div>
