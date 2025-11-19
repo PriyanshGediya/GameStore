@@ -1,55 +1,155 @@
-# Rating
+# 🎮 GameStore  
+A full-featured **Laravel-based digital game marketplace** where users can browse games, purchase them securely using Razorpay, download installers, and manage their profile and purchase history.  
+Includes a powerful **Admin Panel**, **Customer Area**, and **Guest Mode** with full role-based access.
 
-[![CodeFactor](https://www.codefactor.io/repository/github/danielwidhiarto/gamestore/badge)](https://www.codefactor.io/repository/github/danielwidhiarto/gamestore)
+---
 
-# GameStore
+## ⭐ Key Features
 
-GameStore is a Laravel-based online game purchase website that allows users to browse a variety of games, add them to their shopping cart, and proceed to checkout. The system supports two user roles: admin and customer, providing an interactive platform for game enthusiasts.
+### 🔥 Customer Features
+- **Browse Games** with detailed genre, description, screenshots, price, and install size.  
+- **Add to Cart & Checkout** with secure Razorpay payment gateway integration.  
+- **Purchase History** is stored in a dedicated `purchase_history` table.  
+- **Download Purchased Games** (installer stored in `storage/app/public/installers`).  
+- **Write Reviews** — only customers who purchased the game can submit reviews.  
+- **Profile Management** including profile picture upload.
 
-## Features include
+### 🛠 Admin Features
+- Full CRUD for **Games**, **Genres**, **Users**, **Memberships**, and **Reviews**.  
+- Upload **game installers (.zip/.exe)** using Laravel Storage.  
+- Manage **users**, reset passwords, assign roles.  
+- View and manage **purchase history**, transactions, and customer reports.
 
-- **Game Catalogue**: Browse a comprehensive catalog of games with detailed information.
+### 📧 Email & OTP Integration
+- Integrated **PHPMailer SMTP** for:
+  - OTP verification  
+  - Forgot password  
+  - Account verification  
+  - Purchase receipt email  
 
-- **Shopping Cart**: Add games to your shopping cart for easy and convenient purchasing.
+### 💳 Payment Gateway
+- **Razorpay Payment Integration** with:
+  - Order creation  
+  - Payment verification  
+  - Secure server-side validation  
+  - Webhook-ready structure  
 
-- **User Roles**: Two user roles - Admin and Customer - each with specific functionalities and permissions.
+### 📁 Storage & Uploads
+- Image uploads stored in `storage/app/public/images`.  
+- Installer uploads stored in `storage/app/public/installers`.  
+- Public profile pictures stored in `public/uploads/profile`.  
 
-- **Checkout Process**: Seamless checkout process for customers to complete their game purchases.
+---
 
-## Installation
+## 🚀 Tech Stack
 
-To set up GameStore in your local environment, follow these steps
+- **Laravel 10**
+- **PHP 8+**
+- **MySQL**
+- **Blade Templates**
+- **Bootstrap / Tailwind**
+- **Razorpay API**
+- **PHPMailer SMTP**
+- **Composer & NPM**
+- **Laravel Storage**
 
-1. **Clone the repository**: Clone this repository to your local machine using `git clone https://github.com/danielwidhiarto/GameStore.git`.
+---
 
-2. **Install dependencies**: Navigate to the project directory and install the Laravel dependencies by running `composer install`.
+## 🛠 Installation & Setup
 
-3. **Environment Configuration**: Copy the `.env.example` file to `.env` and configure your database and other settings.
+### 1️⃣ Clone this repository  
+```bash
+git clone https://github.com/PriyanshGediya/GameStore.git
+cd GameStore
+2️⃣ Install backend dependencies
+composer install
+3️⃣ Install frontend dependencies
+npm install
+npm run dev
+4️⃣ Create environment file
+cp .env.example .env
 
-4. **Generate Application Key**: Run `php artisan key:generate` to generate the application key.
 
-5. **Database Migration**: Run `php artisan migrate` to create the necessary database tables.
+Then update:
 
-6. **Database seeding (optional)**: If required, you can seed the database with sample data using `php artisan db:seed`.
+DB_DATABASE
 
-7. **Deploy the application**: Start the Laravel development server with `php artisan serve`.
+DB_USERNAME
 
-8. **Access the application**: Open your web browser and visit `http://localhost:8000` to access the GameStore.
+DB_PASSWORD
 
-## Usage
+RAZORPAY_KEY
 
-- **Admin Role**: Log in with Admin credentials to manage games, users, and orders.
+RAZORPAY_SECRET
 
-- **Customer Role**: Register or log in as a customer to browse games, add them to your shopping basket, and complete purchases.
+MAIL_USERNAME
 
-## Contribute
+MAIL_PASSWORD
 
-If you would like to contribute to the development of GameStore, please fork the repository and submit a pull request. We welcome your contributions and feedback.
+5️⃣ Generate app key
+php artisan key:generate
 
-## Support and issues
+6️⃣ Run migrations
+php artisan migrate
 
-If you encounter any problems or have any questions about DraxLorant-Bot, please feel free to open an issue on the [GitHub repository](https://github.com/danielwidhiarto/GameStore/issues). We'll do our best to help you.
+7️⃣ (Optional) Seed sample data
+php artisan db:seed
 
-## Licence
+8️⃣ Link storage
+php artisan storage:link
 
-GameStore is open-source software licensed under the [MIT License](LICENSE).
+9️⃣ Start server
+php artisan serve
+
+
+Access the site at http://localhost:8000
+
+🧑‍💼 User Roles
+👑 Admin
+
+Manage games, genres, users
+
+Upload installers
+
+Manage purchases, memberships, reviews
+
+View all transactions
+
+👤 Customer
+
+Browse games
+
+Add to cart
+
+Secure checkout (Razorpay)
+
+Download games after purchase
+
+Submit reviews
+
+Manage profile
+
+👀 Guest User
+
+Browse games
+
+View details
+
+Register / login
+🤝 Contribution
+
+Contributions are welcome!
+To contribute:
+
+Fork the repo
+
+Create a feature branch
+
+Commit your changes
+
+Create a pull request
+
+🐞 Support / Issues
+
+If you find any issues, feel free to open a GitHub issue:
+👉 https://github.com/PriyanshGediya/GameStore/issues
